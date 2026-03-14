@@ -1,0 +1,86 @@
+{
+  "name": "proxmox-guru",
+  "version": "1.0.0",
+  "description": "Production-grade Proxmox VE desktop management application",
+  "main": "electron/main.js",
+  "author": "itzroot (Noureddine Bellounis)",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "dev": "concurrently \"vite\" \"wait-on http://localhost:5173 && electron .\"",
+    "build": "tsc -p tsconfig.electron.json && vite build && electron-builder",
+    "build:mac": "tsc -p tsconfig.electron.json && vite build && electron-builder --mac",
+    "build:win": "tsc -p tsconfig.electron.json && vite build && electron-builder --win",
+    "build:linux": "tsc -p tsconfig.electron.json && vite build && electron-builder --linux",
+    "preview": "vite preview",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint src electron --ext .ts,.tsx"
+  },
+  "dependencies": {
+    "axios": "^1.6.5",
+    "electron-store": "^8.1.0",
+    "framer-motion": "^10.18.0",
+    "lucide-react": "^0.309.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.21.3",
+    "recharts": "^2.10.3",
+    "zustand": "^4.4.7",
+    "@tanstack/react-query": "^5.17.9"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.5",
+    "@types/react": "^18.2.48",
+    "@types/react-dom": "^18.2.18",
+    "@vitejs/plugin-react": "^4.2.1",
+    "autoprefixer": "^10.4.17",
+    "concurrently": "^8.2.2",
+    "electron": "^28.2.0",
+    "electron-builder": "^24.9.1",
+    "postcss": "^8.4.33",
+    "tailwindcss": "^3.4.1",
+    "typescript": "^5.3.3",
+    "vite": "^5.0.11",
+    "wait-on": "^7.2.0"
+  },
+  "build": {
+    "appId": "com.proxmoxguru.app",
+    "productName": "ProxmoxGuru",
+    "directories": {
+      "output": "dist-electron"
+    },
+    "files": [
+      "dist/**/*",
+      "electron/**/*",
+      "node_modules/**/*"
+    ],
+    "mac": {
+      "category": "public.app-category.developer-tools",
+      "icon": "assets/icon.icns",
+      "target": [
+        {
+          "target": "dmg",
+          "arch": ["x64", "arm64"]
+        }
+      ]
+    },
+    "win": {
+      "icon": "assets/icon.ico",
+      "target": [
+        {
+          "target": "nsis",
+          "arch": ["x64"]
+        }
+      ]
+    },
+    "linux": {
+      "icon": "assets/icon.png",
+      "target": ["AppImage", "deb"],
+      "category": "Development"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true
+    }
+  }
+}

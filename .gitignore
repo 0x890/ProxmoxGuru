@@ -1,0 +1,10 @@
+node_modules/
+dist/
+dist-electron/
+electron/*.js
+electron/*.js.map
+*.local
+.DS_Store
+Thumbs.db
+*.log
+.claude
